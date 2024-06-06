@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 from pathlib import Path
+
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
@@ -42,7 +44,40 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # external
+    "rest_framework",
+    "rest_framework_simplejwt",
+    # mines
+    "authentication",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        minutes=int(os.getenv("AUTH_MIN_ACCESS_TOKEN_LIFETIME"))
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=int(os.getenv("AUTH_DAY_REFRESH_TOKEN_LIFETIME"))
+    ),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ALGORITHM": os.getenv("AUTH_ALGORITHM"),
+    "SIGNING_KEY": os.getenv("APP_SECRET_KEY"),
+    "VERIFYING_KEY": None,
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "AUTH_HEADER_TYPES": (os.getenv("AUTH_HEADER_1"),),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "JTI_CLAIM": "jti",
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -83,14 +118,14 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     },
-    "postgresql": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_pg_NAME"),
-        "USER": os.getenv("DB_pg_USER"),
-        "PASSWORD": os.getenv("DB_pg_PASSWORD"),
-        "HOST": os.getenv("DB_pg_HOST"),
-        "PORT": os.getenv("DB_pg_PORT"),
-    },
+    # "postgresql": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": os.getenv("DB_pg_NAME"),
+    #     "USER": os.getenv("DB_pg_USER"),
+    #     "PASSWORD": os.getenv("DB_pg_PASSWORD"),
+    #     "HOST": os.getenv("DB_pg_HOST"),
+    #     "PORT": os.getenv("DB_pg_PORT"),
+    # },
 }
 
 
