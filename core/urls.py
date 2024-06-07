@@ -7,23 +7,34 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from gestion_miembros.urls import router as gestion_miembros_routes
+from gestion_cualidades.urls import router as gestion_cualidades_routes
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/doc/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
-        "api/doc/swagger/",
+        "api/schema/swagger-ui/",
         SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger",
+        name="swagger-ui",
     ),
-    path(
-        "api/doc/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"
-    ),
+    path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema")),
     path(
         "api/v1/",
         include(
             [
                 path("auth/", include("authentication.urls")),
+                path(
+                    "gestion_miembros/",
+                    include(gestion_miembros_routes.urls),
+                    name="gestion_miembros",
+                ),
+                path(
+                    "gestion_cualidades/",
+                    include(gestion_cualidades_routes.urls),
+                    name="cualidades",
+                ),
             ]
         ),
     ),

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from decouple import config
 from dotenv import load_dotenv
 from datetime import timedelta
 from pathlib import Path
@@ -48,9 +49,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
-    "drf_spectacular_sidecar"
+    "drf_spectacular_sidecar",
     # mines
     "authentication",
+    "gestion_miembros",
+    "gestion_cualidades",
 ]
 
 REST_FRAMEWORK = {
@@ -118,17 +121,13 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_pg_NAME"),
+        "USER": config("DB_pg_USER"),
+        "PASSWORD": config("DB_pg_PASSWORD"),
+        "HOST": config("DB_pg_HOST", default="localhost"),
+        "PORT": config("DB_pg_PORT", default="5432"),
     },
-    # "postgresql": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": os.getenv("DB_pg_NAME"),
-    #     "USER": os.getenv("DB_pg_USER"),
-    #     "PASSWORD": os.getenv("DB_pg_PASSWORD"),
-    #     "HOST": os.getenv("DB_pg_HOST"),
-    #     "PORT": os.getenv("DB_pg_PORT"),
-    # },
 }
 
 
