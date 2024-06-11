@@ -167,3 +167,5 @@ authentication/migrations/__init__.py
 gestion_cualidades/migrations/__init__.py
 gestion_miembros/__init__.py
 gestion_miembros/migrations/__init__.py
+gestion_acentos/__init__.py
+gestion_acentos/migrations/__init__.py
