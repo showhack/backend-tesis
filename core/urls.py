@@ -7,8 +7,11 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from settings.urls import router as settings_routes
 from gestion_miembros.urls import router as gestion_miembros_routes
 from gestion_cualidades.urls import router as gestion_cualidades_routes
+from gestion_acentos.urls import router as gestion_acentos_routes
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,14 +29,24 @@ urlpatterns = [
             [
                 path("auth/", include("authentication.urls")),
                 path(
-                    "gestion_miembros/",
-                    include(gestion_miembros_routes.urls),
-                    name="gestion_miembros",
+                    "settings/",
+                    include(settings_routes.urls),
+                    name="settings",
                 ),
                 path(
-                    "gestion_cualidades/",
+                    "miembros/",
+                    include(gestion_miembros_routes.urls),
+                    name="miembros",
+                ),
+                path(
+                    "gestion-cualidades/",
                     include(gestion_cualidades_routes.urls),
-                    name="cualidades",
+                    name="gestion-cualidades",
+                ),
+                path(
+                    "gestion-acentos/",
+                    include(gestion_acentos_routes.urls),
+                    name="gestion-acentos",
                 ),
             ]
         ),

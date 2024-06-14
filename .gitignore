@@ -171,3 +171,5 @@ gestion_acentos/__init__.py
 gestion_acentos/migrations/__init__.py
 settings/__init__.py
 settings/migrations/__init__.py
+settings/migrations/0001_initial.py
+gestion_acentos/migrations/0001_initial.py

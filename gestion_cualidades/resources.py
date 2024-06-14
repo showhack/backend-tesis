@@ -1,40 +1,31 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .models import (
+    DistVolSemContCualidad,
+    DistVolSemContCualFechaStd,
+    DistVolSemNXContCualFechaEval,
+)
 from .serializers import (
-    CualidadesSerializer,
-    DistribucionSerializer,
-    RelacionDistribucionCualidadesSerializer,
-    RelacionCualidadEntrenadorSerializer,
-    RelacionGrupoEtarioCualidadSerializer,
-)
-from gestion_cualidades.models import (
-    Cualidades,
-    Distribucion,
-    RelacionDistribucionCualidades,
-    RelacionCualidadEntrenador,
-    RelacionGrupoEtarioCualidad,
+    # DistribucionVolSemNXContenidoFechaSerializer,
+    DistVolSemNXContCualidadSerializer,
+    DistVolSemNXContCualFechaStdSerializer,
+    DistVolSemNXContCualFechaEvalSerializer,
 )
 
 
-class CualidadesResource(viewsets.ModelViewSet):
-    queryset = Cualidades.objects.all()
-    serializer_class = CualidadesSerializer
+class DistVolSemNXContCualRes(viewsets.ModelViewSet):
+    queryset = DistVolSemContCualidad.objects.all()
+    serializer_class = DistVolSemNXContCualidadSerializer
+    permission_classes = [IsAuthenticated]
 
 
-class DistribucionResource(viewsets.ModelViewSet):
-    queryset = Distribucion.objects.all()
-    serializer_class = DistribucionSerializer
+class DistVolSemNXContCualFechaStdRes(viewsets.ModelViewSet):
+    queryset = DistVolSemContCualFechaStd.objects.all()
+    serializer_class = DistVolSemNXContCualFechaStdSerializer
+    permission_classes = [IsAuthenticated]
 
 
-class RelacionDistribucionCualidadesResource(viewsets.ModelViewSet):
-    queryset = RelacionDistribucionCualidades.objects.all()
-    serializer_class = RelacionDistribucionCualidadesSerializer
-
-
-class RelacionCualidadEntrenadorResource(viewsets.ModelViewSet):
-    queryset = RelacionCualidadEntrenador.objects.all()
-    serializer_class = RelacionCualidadEntrenadorSerializer
-
-
-class RelacionGrupoEtarioCualidadesResource(viewsets.ModelViewSet):
-    queryset = RelacionGrupoEtarioCualidad.objects.all()
-    serializer_class = RelacionGrupoEtarioCualidadSerializer
+class DistVolSemNXContCualFechaEvalRes(viewsets.ModelViewSet):
+    queryset = DistVolSemNXContCualFechaEval.objects.all()
+    serializer_class = DistVolSemNXContCualFechaEvalSerializer
+    permission_classes = [IsAuthenticated]

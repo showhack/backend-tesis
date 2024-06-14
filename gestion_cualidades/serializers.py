@@ -1,45 +1,31 @@
 from rest_framework import serializers
-from gestion_cualidades.models import (
-    Cualidades,
-    Distribucion,
-    RelacionDistribucionCualidades,
-    RelacionCualidadEntrenador,
-    RelacionGrupoEtarioCualidad,
-)
-from gestion_miembros.serializers import (
-    EntrenadorSerializer,
-    GrupoEtarioSerializer,
+from .models import (
+    # DistribucionVolSemNXContenidoFecha,
+    DistVolSemContCualidad,
+    DistVolSemContCualFechaStd,
+    DistVolSemNXContCualFechaEval,
 )
 
 
-class CualidadesSerializer(serializers.ModelSerializer):
-    entrenador = EntrenadorSerializer(many=True, read_only=True)
-    grupo_etario = GrupoEtarioSerializer(many=True, read_only=True)
+# class DistribucionVolSemNXContenidoFechaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = DistribucionVolSemNXContenidoFecha
+#         fields = "__all__"
 
+
+class DistVolSemNXContCualidadSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cualidades
-        fields = ["nombre", "entrenador", "grupo_etario"]
-
-
-class DistribucionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Distribucion
+        model = DistVolSemContCualidad
         fields = "__all__"
 
 
-class RelacionDistribucionCualidadesSerializer(serializers.ModelSerializer):
+class DistVolSemNXContCualFechaStdSerializer(serializers.ModelSerializer):
     class Meta:
-        model = RelacionDistribucionCualidades
+        model = DistVolSemContCualFechaStd
         fields = "__all__"
 
 
-class RelacionCualidadEntrenadorSerializer(serializers.ModelSerializer):
+class DistVolSemNXContCualFechaEvalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = RelacionCualidadEntrenador
-        fields = "__all__"
-
-
-class RelacionGrupoEtarioCualidadSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RelacionGrupoEtarioCualidad
+        model = DistVolSemNXContCualFechaEval
         fields = "__all__"
