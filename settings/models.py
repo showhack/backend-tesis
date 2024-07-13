@@ -33,8 +33,6 @@ class Municipio(models.Model):
 
 
 
-# TODO 2.5 Migraciones y MAkemigration
-
 
 # TODO 3 Buscar como implementar un cron o job como quiera que se llame en django como funciona y donde se hacen (es para tareas automaticas, como llenar una ves al agno el modelo de las fechas). (Youtube)
 # TODO 4 Buscar como implementar Tests (ChatGPT)
